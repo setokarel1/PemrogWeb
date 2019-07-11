@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 	<title>HELL FEST 2019</title>
 
@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- FontAwesome CSS -->
 	<link rel="stylesheet" href="css/fontawesome-all.min.css">
-	<!-- Swiper CSS -->
-	<link rel="stylesheet" href="css/swiper.min.css">
+
 	<!-- CSS Halaman -->
 	<link rel="stylesheet" href="style.css">
     <!-- JS Owl Carasoeul -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.countdown.css"> 
+    
     
 </head>
 
@@ -24,18 +25,65 @@
                 <div class="row align-items-center">
                     <div class="col-10 col-lg-4">
                         <h1 class="site-branding flex">
-                            <a href="#">HELLFEST</a>
+                    <div>
+            <div id="description"></div>
+            <h1 id="temp"></h1>
+            <div id="location"></div>
+        </div>
+        <!-- 1621177 -->
+        <script>
+            const key = '32b0ef76f94ec4696d05de76d3ecadc3';
+            if (key == '32b0ef76f94ec4696d05de76d3ecadc3') document.getElementById('temp').innerHTML = (
+                'Remember to add your api key!');
+    
+            function weatherBallon(cityID) {
+                fetch('https://api.openweathermap.org/data/2.5/weather?q=Sleman,ID' +
+                        '&appid=32b0ef76f94ec4696d05de76d3ecadc3')
+                    .then(function (resp) {
+                        return resp.json()
+                    }) // Convert data to json
+                    .then(function (data) {
+                        drawWeather(data);
+                    })
+                    .catch(function () {
+                        // catch any errors
+                    });
+            }
+    
+            function drawWeather(d) {
+                var celcius = Math.round(parseFloat(d.main.temp) - 273.15);
+                var fahrenheit = Math.round(((parseFloat(d.main.temp) - 273.15) * 1.8) + 32);
+                var description = d.weather[0].description;
+    
+                document.getElementById('description').innerHTML = description;
+                document.getElementById('temp').innerHTML = celcius + '&deg;';
+                document.getElementById('location').innerHTML = d.name;
+    
+                if (description.indexOf('rain') > 0) {
+                    document.body.className = 'rainy';
+                } else if (description.indexOf('cloud') > 0) {
+                    document.body.className = 'cloudy';
+                } else if (description.indexOf('sunny') > 0) {
+                    document.body.className = 'sunny';
+                } else {
+                    document.body.className = 'clear';
+                }
+            }
+            window.onload = function () {
+                weatherBallon(6167865);
+            }
+        </script>
                         </h1>
                     </div>
 
                     <div class=".col-xs-6 .col-sm-3">
                         <nav class="site-navigation">
                             <ul>
-                                <li><a href="#">HOME</a></li>
-                                <li><a href="#">HELLFEST</a></li>
-                                <li><a href="#">ARTISTS</a></li>
-                                <li><a href="#">BLOG</a></li>
-                                <li><a href="#">CONTACT</a></li>
+                                <li><a href="menutama.html">HOME</a></li>
+                                <li><a href="tiket.html">TICKET</a></li>
+                                <li><a href="pencapaian.html">ACHIEVEMENT</a></li>
+                                <li><a href="about_us.html">ABOUT US</a></li>
+                                <li><a href="kontak.html">CONTACT</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -51,11 +99,10 @@
                     <div class="entry-header">
                         <h2>Hello People!</h2>
 
-                        <div class="entry-meta-date">
-                            01.12.019
-                        </div>
                     </div>
-                    <div class="countdown flex flex-wrap justify-content-between" data-date="2018/06/06">
+
+                    <div id="CountdownbyValue"></div>
+                    <div class="countdown flex flex-wrap justify-content-between" data-date="2020/06/06">
                         <div class="countdown-holder">
                             <div class="dday"></div>
                             <label>Days</label>
@@ -82,7 +129,7 @@
             <div class="row">
                 <div class="col-12 ">
                     <div class="entry-footer">
-                        <a href="#" class="btn">Buy Tickets</a>
+                        <a href="tiket.html" class="btn">Buy Tickets</a>
                         <a href="#" class="btn current">See Lineup</a>
                     </div>
                 </div>
@@ -106,6 +153,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                     <div class="single-album-area">
                         <div class="album-thumb">
+                            <a class="image-popup-vertical-fit" href=""></a>
                             <img src="images/yl.jpg" alt="">
 
                         </div>
@@ -289,33 +337,33 @@
                         <div class="section-heading">
                             <p>See All lineup</p>
                             <h2>H E L L F E S T</h2>
-                        </div><!-- entry-title -->
+                        </div>
 
                         <div class="row the-complete-lineup-artists">
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/ran.jpg" alt=""> </a>
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>RAN</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/adams.jpg" alt=""> </a>
                                    
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>The Adams</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/anne.jpg" alt=""> </a>
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>Anne Marie</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
@@ -323,32 +371,31 @@
                                 </figure>
 
                                 <h3>JOJI</h3>
-                            </div><!-- artist-single -->
-
+                            </div>
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/tulus.jpg" alt=""> </a>
                                    
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>Tulus</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/endah.jpg" alt=""> </a>
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>Endah n Resa</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
                                     <a href="#"> <img src="images/fourtwnty.jpg" alt=""> </a>
-                                </figure><!-- featured-image -->
+                                </figure>
 
                                 <h3>Fourtwnty</h3>
-                            </div><!-- artist-single -->
+                            </div>
 
                             <div class="col-6 col-md-4 col-lg-3 artist-single">
                                 <figure class="featured-image">
@@ -356,20 +403,19 @@
                                 </figure><!-- featured-image -->
 
                                 <h3>Glaskaca</h3>
-                            </div><!-- artist-single -->
-                        </div><!-- the-complete-lineup-artists -->
+                            </div>
+                        </div>
 <footer class="footer">
-    <h6>A festival experience by</h6>
+    <h6>A festival experience by <img src="images/ismaya.png" align="middle"></h6>
 
-    <script type='text/javascript' src='js/jquery.js'></script>
+
+<script type='text/javascript' src='js/jquery.js'></script>
     <script type='text/javascript' src='js/masonry.pkgd.min.js'></script>
     <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
-    <script type='text/javascript' src='js/swiper.min.js'></script>
     <script type='text/javascript' src='js/jquery.countdown.min.js'></script>
     <script type='text/javascript' src='js/circle-progress.min.js'></script>
     <script type='text/javascript' src='js/jquery.countTo.min.js'></script>
     <script type='text/javascript' src='js/custom.js'></script>
-
 
 </body>
 </html>
